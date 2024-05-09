@@ -1,10 +1,9 @@
 import { FastifyPluginCallback } from "fastify";
-import fp from "fastify-plugin";
 import { Pool } from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { migrate } from "drizzle-orm/postgres-js/migrator";
 
-const databasePluginFn: FastifyPluginCallback = (app, _, done) => {
+export const databasePlugin: FastifyPluginCallback = (app, _, done) => {
   const dbPool = new Pool({
     host: process.env.DB_HOST || "localhost",
     port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432,
@@ -17,6 +16,7 @@ const databasePluginFn: FastifyPluginCallback = (app, _, done) => {
   app.addHook("onReady", async () => {
     await dbPool.connect();
     await migrate(database, { migrationsFolder: "./src/common/db/migrations" });
+
     app.log.info("Connected to the database");
   });
 
@@ -31,5 +31,3 @@ const databasePluginFn: FastifyPluginCallback = (app, _, done) => {
 
   done();
 };
-
-export const databasePlugin = databasePluginFn;

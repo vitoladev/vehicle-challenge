@@ -1,5 +1,5 @@
 {
-  "id": "68088f9d-999d-4e03-831a-0c92d3f9218b",
+  "id": "a9b76bc0-ffeb-486a-afd6-55c04fcbb53b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -28,7 +28,7 @@
         },
         "renavam": {
           "name": "renavam",
-          "type": "integer",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true
         },
@@ -54,7 +54,29 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "vehicles_placa_unique": {
+          "name": "vehicles_placa_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "placa"
+          ]
+        },
+        "vehicles_chassi_unique": {
+          "name": "vehicles_chassi_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "chassi"
+          ]
+        },
+        "vehicles_renavam_unique": {
+          "name": "vehicles_renavam_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "renavam"
+          ]
+        }
+      }
     }
   },
   "enums": {},
