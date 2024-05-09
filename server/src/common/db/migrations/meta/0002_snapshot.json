@@ -1,0 +1,89 @@
+{
+  "id": "f64b037d-9f16-462b-bbc2-4717c43b5716",
+  "prevId": "da7eb4a1-9a0e-43b4-8e57-78b1759443cf",
+  "version": "5",
+  "dialect": "pg",
+  "tables": {
+    "vehicles": {
+      "name": "vehicles",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "placa": {
+          "name": "placa",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "chassi": {
+          "name": "chassi",
+          "type": "varchar(17)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "renavam": {
+          "name": "renavam",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "modelo": {
+          "name": "modelo",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "marca": {
+          "name": "marca",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ano": {
+          "name": "ano",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "vehicles_placa_unique": {
+          "name": "vehicles_placa_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "placa"
+          ]
+        },
+        "vehicles_chassi_unique": {
+          "name": "vehicles_chassi_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "chassi"
+          ]
+        },
+        "vehicles_renavam_unique": {
+          "name": "vehicles_renavam_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "renavam"
+          ]
+        }
+      }
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
