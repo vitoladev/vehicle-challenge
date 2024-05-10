@@ -37,17 +37,18 @@ jobs:
         with:
           node-version: 20.13
 
-      - name: go to the server directory
-        run: cd server
-
       - name: Install dependencies
+        working-directory: ./server
         run: npm ci
 
       - name: Run linting
+        working-directory: ./server
         run: npm run lint
 
       - name: Typecheck code
+        working-directory: ./server
         run: npm run typecheck
 
       - name: Run tests
+        working-directory: ./server
         run: npm test
