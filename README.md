@@ -1,6 +1,9 @@
 # Vehicle Challenge
+
 Desafio de cadastro de veiculos com Node.js e Angular
+
 ## Requisitos
+
 Node.js 20 <br>
 Docker <br>
 Docker Compose
@@ -11,10 +14,14 @@ O frontend utiliza Angular v17 com Material UI
 
 ## Backend
 
-O backend utiliza Fastify, Drizzle ORM, banco de dados PostgreSQL, Zod para validação das requisições e Mocha para os testes
+O backend utiliza Fastify, Drizzle ORM, banco de dados PostgreSQL, Zod para validação das requisições e Mocha para os testes.
+
+[Postman Collection](./docs//Vehicle_Challenge.postman_collection) para auxiliar a realização das requisições caso necessário
 
 ## Inicialização
+
 A inicialização pode ser feita manualmente ou com Makefile, utilizando o comando 'make' na raiz do projeto
+
 ```bash
 # Makefile
 make
