@@ -12,10 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateVehicleComponent } from './create-vehicle/create-vehicle.component';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-
-export interface DialogData {
-  animal: 'panda' | 'unicorn' | 'lion';
-}
+import { UpdateVehicleComponent } from './update-vehicle/update-vehicle.component';
 
 @Component({
   selector: 'app-vehicle',
@@ -52,11 +49,10 @@ export class VehicleComponent {
     public dialog: MatDialog
   ) {}
 
-  openDialog(): void {
+  openCreateVehicleDialog(): void {
     const dialogRef = this.dialog.open(CreateVehicleComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('Dialog closed with result:', result);
       if (result) {
         this.loadData();
       }
@@ -77,15 +73,22 @@ export class VehicleComponent {
     });
   }
 
-  createVehicle(element: Vehicle): void {
-    this.vehicleService.create(element).subscribe(() => {
+  createVehicle(vehicle: Vehicle): void {
+    this.vehicleService.create(vehicle).subscribe(() => {
       this.loadData();
     });
   }
 
-  editElement(element: Vehicle): void {
-    // Implement logic for edit action
-    console.log('Edit:', element);
+  editElement(vehicle: Vehicle): void {
+    const dialogRef = this.dialog.open(UpdateVehicleComponent, {
+      data: vehicle,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadData();
+      }
+    });
   }
 
   deleteElement(id: number): void {
