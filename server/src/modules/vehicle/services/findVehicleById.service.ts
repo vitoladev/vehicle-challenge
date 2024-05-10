@@ -1,13 +1,8 @@
-import { eq } from "drizzle-orm";
-import app from "../../../app";
-import { vehicles } from "../../../common/db/schema";
 import { vehicleDoesNotExistError } from "../vehicle.errors";
+import { vehicleRepository } from "../vehicle.repository";
 
 export const findVehicleById = async (id: number) => {
-  const result = await app.db
-    .select()
-    .from(vehicles)
-    .where(eq(vehicles.id, id));
+  const result = await vehicleRepository.findById(id);
 
   const vehicle = result[0];
   if (!vehicle) {

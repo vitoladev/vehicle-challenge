@@ -1,6 +1,4 @@
-import { asc } from "drizzle-orm";
-import app from "../../../app";
-import { vehicles } from "../../../common/db/schema";
+import { vehicleRepository } from "../vehicle.repository";
 
 export const findAllVehicles = async ({
   page = 1,
@@ -8,11 +6,4 @@ export const findAllVehicles = async ({
 }: {
   page: number;
   pageSize: number;
-}) => {
-  return await app.db
-    .select()
-    .from(vehicles)
-    // .orderBy(asc(vehicles.id))
-    .limit(pageSize)
-    .offset((page - 1) * pageSize);
-};
+}) => await vehicleRepository.findAll({ page, pageSize });
