@@ -1,12 +1,13 @@
 import { FastifyPluginCallback } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import { z } from "zod";
-import { vehicleSchema } from "./vehicle.schema";
+import { vehicleIdParamSchema, vehicleSchema } from "./vehicle.schema";
 import {
   createVehicle,
+  deleteVehicle,
   findAllVehicles,
   findVehicleById,
-} from "./vehicle.service";
+  updateVehicle,
+} from "./services";
 
 export const vehicleController: FastifyPluginCallback = (app, _, done) => {
   app.withTypeProvider<ZodTypeProvider>().post(
@@ -22,21 +23,38 @@ export const vehicleController: FastifyPluginCallback = (app, _, done) => {
     }
   );
 
-  app.withTypeProvider<ZodTypeProvider>().get("/", async (req, reply) => {
-    const vehicles = await findAllVehicles();
-    return reply.send(vehicles);
-  });
+  app.withTypeProvider<ZodTypeProvider>().put(
+    "/:id",
+    {
+      schema: {
+        params: vehicleIdParamSchema,
+        body: vehicleSchema,
+      },
+    },
+    async ({ body, params: { id } }, reply) => {
+      const vehicle = await updateVehicle(id, body);
+      reply.send(vehicle);
+    }
+  );
+
+  app.withTypeProvider<ZodTypeProvider>().delete(
+    "/:id",
+    {
+      schema: {
+        params: vehicleIdParamSchema,
+      },
+    },
+    async ({ params: { id } }, reply) => {
+      await deleteVehicle(id);
+      return reply.code(204).send();
+    }
+  );
 
   app.withTypeProvider<ZodTypeProvider>().get(
     "/:id",
     {
       schema: {
-        params: z.object({
-          id: z
-            .string()
-            .refine((id) => Number.isInteger(Number(id)) && Number(id) > 0)
-            .transform((id) => Number(id)),
-        }),
+        params: vehicleIdParamSchema,
       },
     },
     async ({ params: { id } }, reply) => {
@@ -44,6 +62,11 @@ export const vehicleController: FastifyPluginCallback = (app, _, done) => {
       return reply.send(vehicle);
     }
   );
+
+  app.withTypeProvider<ZodTypeProvider>().get("/", async (_req, reply) => {
+    const vehicles = await findAllVehicles({ page: 1, pageSize: 10 });
+    return reply.send(vehicles);
+  });
 
   done();
 };
