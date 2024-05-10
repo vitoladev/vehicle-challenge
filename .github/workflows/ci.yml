@@ -37,6 +37,9 @@ jobs:
         with:
           node-version: 20.13
 
+      - name: go to the server directory
+        run: cd server
+
       - name: Install dependencies
         run: npm ci
 
