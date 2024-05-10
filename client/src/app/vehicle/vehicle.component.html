@@ -3,7 +3,11 @@
     <mat-card-title>Veículos</mat-card-title>
   </mat-card-header>
   <mat-card-actions align="end">
-    <button mat-raised-button color="primary" (click)="openCreateVehicleDialog()">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="openCreateVehicleDialog()"
+    >
       Criar Veículo
     </button>
   </mat-card-actions>
@@ -63,5 +67,16 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+
+    <mat-paginator
+      (page)="pageChangeEvent($event)"
+      [length]="total"
+      [pageSize]="pageSize"
+      [pageIndex]="pageIndex"
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements"
+    >
+    </mat-paginator>
   </mat-card-content>
 </mat-card>

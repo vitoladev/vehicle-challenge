@@ -1,6 +1,6 @@
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Vehicle } from './vehicle.interface';
 import { VehicleService } from './vehicle.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,6 +13,11 @@ import { CreateVehicleComponent } from './create-vehicle/create-vehicle.componen
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { UpdateVehicleComponent } from './update-vehicle/update-vehicle.component';
+import {
+  MatPaginator,
+  MatPaginatorModule,
+  PageEvent,
+} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-vehicle',
@@ -23,6 +28,7 @@ import { UpdateVehicleComponent } from './update-vehicle/update-vehicle.componen
     MatCardModule,
     MatIconModule,
     MatTableModule,
+    MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
@@ -31,7 +37,9 @@ import { UpdateVehicleComponent } from './update-vehicle/update-vehicle.componen
   templateUrl: './vehicle.component.html',
   styleUrl: './vehicle.component.css',
 })
-export class VehicleComponent {
+export class VehicleComponent implements OnInit {
+  @ViewChild('paginator', { static: true }) paginator!: MatPaginator;
+  dataSource = new MatTableDataSource<Vehicle>([]);
   displayedColumns = [
     'id',
     'placa',
@@ -42,7 +50,9 @@ export class VehicleComponent {
     'ano',
     'actions',
   ];
-  dataSource: Vehicle[] = [];
+  total = 0;
+  pageIndex = 0;
+  pageSize = 10;
 
   constructor(
     private vehicleService: VehicleService,
@@ -68,9 +78,19 @@ export class VehicleComponent {
   }
 
   loadData(): void {
-    this.vehicleService.findAll().subscribe((data) => {
-      this.dataSource = data;
-    });
+    this.vehicleService
+      .findAll({ page: this.pageIndex + 1, pageSize: this.pageSize })
+      .subscribe((result) => {
+        this.dataSource.data = result.data;
+        this.total = result.totalRecords;
+        this.dataSource.paginator = this.paginator;
+      });
+  }
+
+  pageChangeEvent({ pageIndex, pageSize }: PageEvent) {
+    this.pageIndex = pageIndex;
+    this.pageSize = pageSize;
+    this.loadData();
   }
 
   createVehicle(vehicle: Vehicle): void {

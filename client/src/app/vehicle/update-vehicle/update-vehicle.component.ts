@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
-  MatDialog,
   MatDialogActions,
   MatDialogContent,
   MatDialogModule,
@@ -69,12 +68,8 @@ export class UpdateVehicleComponent {
     ],
   });
 
-  ngOnInit() {
-    // get data from dialogRef and autofill the form
-  }
-
   onSubmit() {
-    const input = this.vehicleForm.value;
+    const input = this.vehicleForm.value as Partial<Vehicle>;
 
     this.vehicleService.update(this.data.id, input).subscribe({
       next: (response) => {

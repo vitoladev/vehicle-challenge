@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {
-  MatDialog,
   MatDialogActions,
   MatDialogContent,
   MatDialogModule,
@@ -17,6 +16,7 @@ import { VehicleService } from '../vehicle.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
+import { Vehicle } from '../vehicle.interface';
 
 @Component({
   selector: 'app-create-vehicle',
@@ -67,7 +67,7 @@ export class CreateVehicleComponent {
   });
 
   onSubmit() {
-    const data = this.vehicleForm.value;
+    const data = this.vehicleForm.value as Partial<Vehicle>;
 
     this.vehicleService.create(data).subscribe({
       next: (response) => {
@@ -91,7 +91,9 @@ export class CreateVehicleComponent {
         }
 
         if (error.error.code === 'RENAVAM_ALREADY_EXISTS') {
-          this.vehicleForm.controls.renavam.setErrors({ renavamExists: true });
+          this.vehicleForm.controls.renavam.setErrors({
+            renavamExists: true,
+          });
         }
 
         this.snackBar.open(error.error.message, 'Fechar', {
