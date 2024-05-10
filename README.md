@@ -14,7 +14,7 @@ O backend utiliza Fastify, Drizzle ORM, banco de dados PostgreSQL, Zod para vali
 cd server
 cp .env.example .env
 docker-compose up -d # Inicializa o banco de dados PostgreSQL local
-npm install
+npm ci
 npm run db:push # Roda as migrations do banco de dados
 npm run dev # Inicializa o backend
 ```

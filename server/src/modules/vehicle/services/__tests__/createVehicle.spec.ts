@@ -1,4 +1,4 @@
-import assert from "node:assert";
+import assert from "assert";
 import supertest from "supertest";
 import app from "../../../../app";
 import { faker } from "@faker-js/faker";
