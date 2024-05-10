@@ -6,19 +6,26 @@ import {
   validatorCompiler,
 } from "fastify-type-provider-zod";
 import fastifyHelmet from "@fastify/helmet";
-import { errorHandler } from "./common/errorHandler";
+import { errorHandler } from "./common/errors/errorHandler";
 import { vehicleController } from "./modules/vehicle/vehicle.controller";
 
-const app = fastify({ logger: true });
-app.setErrorHandler(errorHandler);
-app.register(fastifyHelmet);
+const buildApp = () => {
+  const app = fastify({
+    logger: process.env.NODE_ENV === "test" ? false : true,
+  });
+  app.setErrorHandler(errorHandler);
+  app.register(fastifyHelmet);
 
-app.setValidatorCompiler(validatorCompiler);
-app.setSerializerCompiler(serializerCompiler);
+  app.setValidatorCompiler(validatorCompiler);
+  app.setSerializerCompiler(serializerCompiler);
 
-app.register(fp(databasePlugin));
-app.register(fp(gracefulShutdownPlugin));
+  app.register(fp(databasePlugin));
+  app.register(fp(gracefulShutdownPlugin));
 
-app.register(vehicleController, { prefix: "/vehicles" });
+  app.register(vehicleController, { prefix: "/vehicles" });
 
+  return app;
+};
+
+const app = buildApp();
 export default app;

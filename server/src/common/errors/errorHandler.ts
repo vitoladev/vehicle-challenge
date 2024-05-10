@@ -11,7 +11,7 @@ export const errorHandler = (
       statusCode: 422,
       error: "Unprocessable Entity",
       message: "Validation error",
-      errors: JSON.parse(error.message),
+      errors: error.issues,
     });
     return;
   }
