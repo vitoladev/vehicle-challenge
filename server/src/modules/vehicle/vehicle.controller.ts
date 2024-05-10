@@ -1,6 +1,10 @@
 import { FastifyPluginCallback } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
-import { vehicleIdParamSchema, vehicleSchema } from "./vehicle.schema";
+import {
+  vehicleIdParamSchema,
+  vehiclePaginationQuerySchema,
+  vehicleSchema
+} from "./vehicle.schema";
 import {
   createVehicle,
   deleteVehicle,
@@ -63,10 +67,18 @@ export const vehicleController: FastifyPluginCallback = (app, _, done) => {
     }
   );
 
-  app.withTypeProvider<ZodTypeProvider>().get("/", async (_req, reply) => {
-    const vehicles = await findAllVehicles({ page: 1, pageSize: 10 });
-    return reply.send(vehicles);
-  });
+  app.withTypeProvider<ZodTypeProvider>().get(
+    "/",
+    {
+      schema: {
+        querystring: vehiclePaginationQuerySchema
+      }
+    },
+    async ({ query: { page, pageSize } }, reply) => {
+      const vehicles = await findAllVehicles({ page, pageSize });
+      return reply.send(vehicles);
+    }
+  );
 
   done();
 };

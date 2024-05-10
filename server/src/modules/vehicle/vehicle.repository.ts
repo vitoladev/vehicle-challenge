@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import app from "../../app";
 import { vehicles } from "../../common/db/schema";
 import { VehicleSchema } from "./vehicle.schema";
@@ -32,12 +32,26 @@ export const vehicleRepositoryFactory = () => {
     page: number;
     pageSize: number;
   }) => {
-    return await app.db
-      .select()
-      .from(vehicles)
-      .limit(pageSize)
-      .offset((page - 1) * pageSize)
-      .execute();
+    const [data, [{ count }]] = await Promise.all([
+      app.db
+        .select()
+        .from(vehicles)
+        .limit(pageSize)
+        .offset((page - 1) * pageSize)
+        .execute(),
+      app.db
+        .select({ count: sql<number>`CAST(COUNT(*) AS INTEGER)` })
+        .from(vehicles)
+        .execute()
+    ]);
+
+    const totalPages = Math.ceil(count / pageSize);
+
+    return {
+      data,
+      totalRecords: count,
+      totalPages
+    };
   };
 
   const findById = async (id: number) => {

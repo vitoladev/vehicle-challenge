@@ -14,9 +14,16 @@ export const vehicleSchema = z.object({
 
 export type VehicleSchema = z.infer<typeof vehicleSchema>;
 
+const ZStringToNumber = z
+  .string()
+  .refine(id => Number.isInteger(Number(id)) && Number(id) > 0)
+  .transform(id => Number(id));
+
 export const vehicleIdParamSchema = z.object({
-  id: z
-    .string()
-    .refine(id => Number.isInteger(Number(id)) && Number(id) > 0)
-    .transform(id => Number(id))
+  id: ZStringToNumber
+});
+
+export const vehiclePaginationQuerySchema = z.object({
+  page: ZStringToNumber,
+  pageSize: ZStringToNumber
 });

@@ -11,8 +11,11 @@ describe("Find All Vehicles - GET /vehicles", () => {
 
   it("should return an empty array if no vehicles found", async () => {
     // Assuming there are no vehicles in the database
-    const response = await request(app.server).get("/vehicles").expect(200);
-    assert.deepStrictEqual(response.body, []);
+    const response = await request(app.server)
+      .get("/vehicles")
+      .query({ page: 1, pageSize: 10 })
+      .expect(200);
+    assert.deepStrictEqual(response.body.data, []);
   });
 
   it("should return all vehicles", async () => {
@@ -20,10 +23,14 @@ describe("Find All Vehicles - GET /vehicles", () => {
       createVehicle(vehicleMock()),
       createVehicle(vehicleMock()),
       createVehicle(vehicleMock()),
+      createVehicle(vehicleMock()),
       createVehicle(vehicleMock())
     ]);
 
-    const response = await request(app.server).get("/vehicles").expect(200);
-    assert.equal(response.body.length, 4);
+    const response = await request(app.server)
+      .get("/vehicles")
+      .query({ page: 1, pageSize: 5 })
+      .expect(200);
+    assert.equal(response.body.total, 5);
   });
 });
