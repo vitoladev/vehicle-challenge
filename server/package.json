@@ -17,7 +17,7 @@
     "typecheck": "tsc --noEmit",
     "dev": "ts-node -r dotenv/config --transpile-only src/main.ts",
     "start": "node build/index.js",
-    "test": "NODE_ENV=test mocha"
+    "test": "NODE_ENV=test mocha --exit"
   },
   "keywords": [],
   "author": "",
