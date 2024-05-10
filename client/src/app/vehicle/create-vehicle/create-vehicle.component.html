@@ -1,0 +1,126 @@
+<mat-card>
+  <mat-dialog-content>
+    <!-- Put a close button here in the top right please-->
+    <button mat-icon-button mat-dialog-close (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <h2>Criar Veículo</h2>
+    <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <mat-form-field class="form-field">
+          <mat-label>Placa</mat-label>
+          <input
+            matInput
+            placeholder="Placa"
+            formControlName="placa"
+            required
+          />
+          <mat-error
+            *ngIf="
+              vehicleForm.get('placa')?.hasError('required') ||
+              vehicleForm.get('placa')?.hasError('minLength') ||
+              vehicleForm.get('placa')?.hasError('maxLength')
+            "
+          >
+            A placa deve ter 7 caracteres.
+          </mat-error>
+          <mat-error
+            *ngIf="
+              vehicleForm.get('placa')?.invalid &&
+              vehicleForm.get('placa')?.touched &&
+              vehicleForm.get('placa')?.hasError('placaExists')
+            "
+          >
+            A placa já existe.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Chassi</mat-label>
+          <input
+            matInput
+            placeholder="Chassi"
+            formControlName="chassi"
+            required
+          />
+          <mat-error
+            *ngIf="
+              vehicleForm.get('chassi')?.hasError('required') ||
+              vehicleForm.get('chassi')?.hasError('minLength') ||
+              vehicleForm.get('chassi')?.hasError('maxLength')
+            "
+          >
+            O chassi deve ter 17 caracteres.
+          </mat-error>
+          <mat-error
+            *ngIf="
+              vehicleForm.get('chassi')?.invalid &&
+              vehicleForm.get('chassi')?.touched &&
+              vehicleForm.get('chassi')?.hasError('chassiExists')
+            "
+          >
+            O Chassi já existe.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>RENAVAM</mat-label>
+          <input
+            matInput
+            placeholder="RENAVAM"
+            type="number"
+            formControlName="renavam"
+            required
+          />
+          <mat-error
+            *ngIf="
+              vehicleForm.get('renavam')?.invalid &&
+              vehicleForm.get('renavam')?.touched &&
+              vehicleForm.get('renavam')?.hasError('renavamExists')
+            "
+          >
+            O RENAVAM já existe.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field class="form-field">
+          <mat-label>Modelo</mat-label>
+          <input
+            matInput
+            placeholder="Modelo"
+            formControlName="modelo"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Marca</mat-label>
+          <input
+            matInput
+            placeholder="Marca"
+            formControlName="marca"
+            required
+          />
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <mat-label>Ano</mat-label>
+          <input matInput placeholder="Ano" formControlName="ano" required />
+        </mat-form-field>
+      </div>
+      <mat-card-actions align="end">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!vehicleForm.valid"
+          color="primary"
+          type="submit"
+        >
+          Salvar
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-dialog-content>
+</mat-card>
+
+<!-- <mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+</mat-dialog-actions> -->
