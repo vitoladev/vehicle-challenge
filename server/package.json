@@ -14,6 +14,7 @@
     "lint": "eslint src/ --ignore-pattern .gitignore",
     "lint:fix": "npm run lint -- --fix",
     "build": "tsc",
+    "typecheck": "tsc --noEmit",
     "dev": "ts-node -r dotenv/config --transpile-only src/main.ts",
     "start": "node build/index.js",
     "test": "NODE_ENV=test mocha"
