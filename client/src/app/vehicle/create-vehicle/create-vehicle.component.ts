@@ -53,7 +53,14 @@ export class CreateVehicleComponent {
       '',
       [Validators.required, Validators.minLength(17), Validators.maxLength(17)],
     ],
-    renavam: [10000000000, Validators.required],
+    renavam: [
+      0,
+      [
+        Validators.required,
+        Validators.min(100000000),
+        Validators.max(99999999999),
+      ],
+    ],
     modelo: ['', Validators.required],
     marca: ['', Validators.required],
     ano: [

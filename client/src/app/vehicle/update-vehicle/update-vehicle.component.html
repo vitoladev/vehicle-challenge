@@ -66,9 +66,21 @@
             matInput
             placeholder="RENAVAM"
             type="number"
+            min="100000000"
+            max="99999999999"
             formControlName="renavam"
             required
           />
+          <mat-error
+            *ngIf="
+              vehicleForm.get('renavam')?.hasError('required') ||
+              vehicleForm.get('renavam')?.hasError('minLength') ||
+              vehicleForm.get('renavam')?.hasError('maxLength')
+            "
+          >
+            O chassi deve ter entre 9 a 11 digitos.
+          </mat-error>
+
           <mat-error
             *ngIf="
               vehicleForm.get('renavam')?.invalid &&

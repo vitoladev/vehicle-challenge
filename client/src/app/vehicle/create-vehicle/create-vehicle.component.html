@@ -71,6 +71,16 @@
           />
           <mat-error
             *ngIf="
+              vehicleForm.get('renavam')?.hasError('required') ||
+              vehicleForm.get('renavam')?.hasError('minLength') ||
+              vehicleForm.get('renavam')?.hasError('maxLength')
+            "
+          >
+            O RENAVAM deve ter entre 9 a 11 digitos.
+          </mat-error>
+
+          <mat-error
+            *ngIf="
               vehicleForm.get('renavam')?.invalid &&
               vehicleForm.get('renavam')?.touched &&
               vehicleForm.get('renavam')?.hasError('renavamExists')

@@ -55,7 +55,14 @@ export class UpdateVehicleComponent {
       this.data.chassi,
       [Validators.required, Validators.minLength(17), Validators.maxLength(17)],
     ],
-    renavam: [this.data.renavam, Validators.required],
+    renavam: [
+      this.data.renavam,
+      [
+        Validators.required,
+        Validators.min(100000000),
+        Validators.max(99999999999),
+      ],
+    ],
     modelo: [this.data.modelo, Validators.required],
     marca: [this.data.marca, Validators.required],
     ano: [
