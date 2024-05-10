@@ -8,6 +8,7 @@ import {
 import fastifyHelmet from "@fastify/helmet";
 import { errorHandler } from "./common/errors/errorHandler";
 import { vehicleController } from "./modules/vehicle/vehicle.controller";
+import fastifyCors from "@fastify/cors";
 
 const buildApp = () => {
   const app = fastify({
@@ -15,6 +16,9 @@ const buildApp = () => {
   });
   app.setErrorHandler(errorHandler);
   app.register(fastifyHelmet);
+  app.register(fastifyCors, {
+    origin: "*"
+  });
 
   app.setValidatorCompiler(validatorCompiler);
   app.setSerializerCompiler(serializerCompiler);

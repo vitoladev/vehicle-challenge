@@ -1,7 +1,10 @@
 import { z } from "zod";
 
 export const vehicleSchema = z.object({
-  placa: z.string().refine(placa => /^[A-Z]{3}-[0-9]{4}$/.test(placa)),
+  placa: z
+    .string()
+    .length(7)
+    .refine(value => value === value.toUpperCase()),
   chassi: z.string().length(17),
   renavam: z.number().int().min(100000000).max(99999999999),
   modelo: z.string(),
