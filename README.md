@@ -1,9 +1,25 @@
 # Vehicle Challenge
 Desafio de cadastro de veiculos com Node.js e Angular
 
+## Requisitos
+Node.js 20 <br>
+Docker <br>
+Docker Compose
 
 ## Backend
 O backend utiliza Fastify, Drizzle ORM, banco de dados PostgreSQL, Zod para validação das requisições e Mocha para os testes
+
+### Inicialização
+```bash
+cd server
+cp .env.example .env
+docker-compose up -d # Inicializa o banco de dados PostgreSQL local
+npm install
+npm run db:push # Roda as migrations do banco de dados
+npm run dev # Inicializa o backend
+```
+
+### Estrutura de arquivos:
 ```
 server/
 ├── src/
