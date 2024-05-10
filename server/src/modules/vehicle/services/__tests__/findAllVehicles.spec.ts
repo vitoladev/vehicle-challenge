@@ -31,6 +31,7 @@ describe("Find All Vehicles - GET /vehicles", () => {
       .get("/vehicles")
       .query({ page: 1, pageSize: 5 })
       .expect(200);
-    assert.equal(response.body.total, 5);
+
+    assert.equal(response.body.totalRecords, 5);
   });
 });
