@@ -3,7 +3,7 @@ import fastify from "fastify";
 import { databasePlugin, gracefulShutdownPlugin } from "./common/plugins";
 import {
   serializerCompiler,
-  validatorCompiler,
+  validatorCompiler
 } from "fastify-type-provider-zod";
 import fastifyHelmet from "@fastify/helmet";
 import { errorHandler } from "./common/errors/errorHandler";
@@ -11,7 +11,7 @@ import { vehicleController } from "./modules/vehicle/vehicle.controller";
 
 const buildApp = () => {
   const app = fastify({
-    logger: process.env.NODE_ENV === "test" ? false : true,
+    logger: process.env.NODE_ENV === "test" ? false : true
   });
   app.setErrorHandler(errorHandler);
   app.register(fastifyHelmet);

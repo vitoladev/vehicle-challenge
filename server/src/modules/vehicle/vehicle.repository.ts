@@ -27,7 +27,7 @@ export const vehicleRepositoryFactory = () => {
 
   const findAll = async ({
     page = 1,
-    pageSize = 10,
+    pageSize = 10
   }: {
     page: number;
     pageSize: number;
@@ -53,7 +53,7 @@ export const vehicleRepositoryFactory = () => {
     update,
     delete: deleteVehicle,
     findAll,
-    findById,
+    findById
   };
 };
 

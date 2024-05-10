@@ -5,7 +5,7 @@ import {
   serial,
   text,
   uniqueIndex,
-  varchar,
+  varchar
 } from "drizzle-orm/pg-core";
 
 export const vehicles = pgTable(
@@ -17,13 +17,13 @@ export const vehicles = pgTable(
     renavam: bigint("renavam", { mode: "number" }).unique().notNull(),
     modelo: text("modelo").notNull(),
     marca: text("marca").notNull(),
-    ano: integer("ano").notNull(),
+    ano: integer("ano").notNull()
   },
-  (table) => {
+  table => {
     return {
       placaIdx: uniqueIndex("placa_idx").on(table.placa),
       chassiIdx: uniqueIndex("chassi_idx").on(table.chassi),
-      renavamIdx: uniqueIndex("renavam_idx").on(table.renavam),
+      renavamIdx: uniqueIndex("renavam_idx").on(table.renavam)
     };
   }
 );

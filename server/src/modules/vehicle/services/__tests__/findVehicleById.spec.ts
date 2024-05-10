@@ -26,7 +26,7 @@ describe("Find Vehicle By Id - GET /vehicles/:id", () => {
   it("should return 404 if the vehicle is not found", async () => {
     const vehicleIdThatDoesNotExist = faker.number.int({
       min: 10000,
-      max: 20000,
+      max: 20000
     });
 
     const response = await supertest(app.server)

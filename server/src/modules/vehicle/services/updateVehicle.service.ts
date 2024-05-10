@@ -1,6 +1,6 @@
 import {
   vehicleDoesNotExistError,
-  handleVehicleUniqueConstraintError,
+  handleVehicleUniqueConstraintError
 } from "../vehicle.errors";
 import { VehicleSchema } from "../vehicle.schema";
 import { vehicleRepository } from "../vehicle.repository";
@@ -18,7 +18,7 @@ export const updateVehicle = async (id: number, data: VehicleSchema) => {
     handleVehicleUniqueConstraintError(error, {
       placa: data.placa,
       chassi: data.chassi,
-      renavam: data.renavam,
+      renavam: data.renavam
     });
     throw error;
   }

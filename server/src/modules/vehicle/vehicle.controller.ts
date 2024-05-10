@@ -6,7 +6,7 @@ import {
   deleteVehicle,
   findAllVehicles,
   findVehicleById,
-  updateVehicle,
+  updateVehicle
 } from "./services";
 
 export const vehicleController: FastifyPluginCallback = (app, _, done) => {
@@ -14,8 +14,8 @@ export const vehicleController: FastifyPluginCallback = (app, _, done) => {
     "/",
     {
       schema: {
-        body: vehicleSchema,
-      },
+        body: vehicleSchema
+      }
     },
     async ({ body }, reply) => {
       const vehicle = await createVehicle(body);
@@ -28,8 +28,8 @@ export const vehicleController: FastifyPluginCallback = (app, _, done) => {
     {
       schema: {
         params: vehicleIdParamSchema,
-        body: vehicleSchema,
-      },
+        body: vehicleSchema
+      }
     },
     async ({ body, params: { id } }, reply) => {
       const vehicle = await updateVehicle(id, body);
@@ -41,8 +41,8 @@ export const vehicleController: FastifyPluginCallback = (app, _, done) => {
     "/:id",
     {
       schema: {
-        params: vehicleIdParamSchema,
-      },
+        params: vehicleIdParamSchema
+      }
     },
     async ({ params: { id } }, reply) => {
       await deleteVehicle(id);
@@ -54,8 +54,8 @@ export const vehicleController: FastifyPluginCallback = (app, _, done) => {
     "/:id",
     {
       schema: {
-        params: vehicleIdParamSchema,
-      },
+        params: vehicleIdParamSchema
+      }
     },
     async ({ params: { id } }, reply) => {
       const vehicle = await findVehicleById(id);

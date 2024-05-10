@@ -1,10 +1,6 @@
 import { FastifyPluginCallback } from "fastify";
 
-export const gracefulShutdownPlugin: FastifyPluginCallback = (
-  app,
-  _,
-  done
-) => {
+export const gracefulShutdownPlugin: FastifyPluginCallback = (app, _, done) => {
   const shutdownGracefully = async (signal: NodeJS.Signals) => {
     app.log.fatal(`Received signal to terminate: ${signal}`);
 

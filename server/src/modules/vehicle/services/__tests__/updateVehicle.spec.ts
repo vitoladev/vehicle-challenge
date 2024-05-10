@@ -14,7 +14,7 @@ describe("Update Vehicle - PUT /vehicles/:id", () => {
       ...vehicleData,
       modelo: faker.vehicle.model(),
       marca: faker.vehicle.manufacturer(),
-      ano: faker.number.int({ min: 1886, max: 2024 }),
+      ano: faker.number.int({ min: 1886, max: 2024 })
     };
 
     const response = await supertest(app.server)
@@ -34,7 +34,7 @@ describe("Update Vehicle - PUT /vehicles/:id", () => {
 
     const updatedVehicle = {
       ...vehicleData,
-      placa: vehiclePlateMock(),
+      placa: vehiclePlateMock()
     };
 
     const response = await supertest(app.server)
@@ -52,12 +52,12 @@ describe("Update Vehicle - PUT /vehicles/:id", () => {
 
     const [vehicle] = await Promise.all([
       createVehicle(vehicleData),
-      createVehicle(vehicleWithAPlateThatExists),
+      createVehicle(vehicleWithAPlateThatExists)
     ]);
 
     const updatedVehicle = {
       ...vehicleData,
-      placa: vehicleWithAPlateThatExists.placa,
+      placa: vehicleWithAPlateThatExists.placa
     };
 
     const response = await supertest(app.server)
@@ -74,7 +74,7 @@ describe("Update Vehicle - PUT /vehicles/:id", () => {
 
     const updatedVehicle = {
       ...vehicleData,
-      chassi: faker.vehicle.vin(),
+      chassi: faker.vehicle.vin()
     };
 
     const response = await supertest(app.server)
@@ -92,12 +92,12 @@ describe("Update Vehicle - PUT /vehicles/:id", () => {
 
     const [vehicle] = await Promise.all([
       createVehicle(vehicleData),
-      createVehicle(vehicleWithAChassiThatExists),
+      createVehicle(vehicleWithAChassiThatExists)
     ]);
 
     const updatedVehicle = {
       ...vehicleData,
-      chassi: vehicleWithAChassiThatExists.chassi,
+      chassi: vehicleWithAChassiThatExists.chassi
     };
 
     const response = await supertest(app.server)
@@ -114,7 +114,7 @@ describe("Update Vehicle - PUT /vehicles/:id", () => {
 
     const updatedVehicle = {
       ...vehicleData,
-      renavam: faker.number.int({ min: 100000000, max: 99999999999 }),
+      renavam: faker.number.int({ min: 100000000, max: 99999999999 })
     };
 
     const response = await supertest(app.server)
@@ -132,12 +132,12 @@ describe("Update Vehicle - PUT /vehicles/:id", () => {
 
     const [vehicle] = await Promise.all([
       createVehicle(vehicleData),
-      createVehicle(vehicleWithARenavamThatExists),
+      createVehicle(vehicleWithARenavamThatExists)
     ]);
 
     const updatedVehicle = {
       ...vehicleData,
-      renavam: vehicleWithARenavamThatExists.renavam,
+      renavam: vehicleWithARenavamThatExists.renavam
     };
 
     const response = await supertest(app.server)
@@ -153,7 +153,7 @@ describe("Update Vehicle - PUT /vehicles/:id", () => {
 
     const vehicleIdThatDoesNotExist = faker.number.int({
       min: 10000,
-      max: 20000,
+      max: 20000
     });
 
     const response = await supertest(app.server)

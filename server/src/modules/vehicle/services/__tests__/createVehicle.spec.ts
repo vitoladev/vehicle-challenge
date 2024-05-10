@@ -112,7 +112,7 @@ describe("Create Vehicle - POST /vehicles", () => {
       .send({
         ...vehicleThatExists,
         placa: vehiclePlateMock(),
-        chassi: faker.vehicle.vin(),
+        chassi: faker.vehicle.vin()
       })
       .expect(409);
 

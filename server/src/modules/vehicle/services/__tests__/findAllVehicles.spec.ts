@@ -20,7 +20,7 @@ describe("Find All Vehicles - GET /vehicles", () => {
       createVehicle(vehicleMock()),
       createVehicle(vehicleMock()),
       createVehicle(vehicleMock()),
-      createVehicle(vehicleMock()),
+      createVehicle(vehicleMock())
     ]);
 
     const response = await request(app.server).get("/vehicles").expect(200);

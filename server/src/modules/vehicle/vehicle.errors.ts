@@ -1,6 +1,7 @@
 import createError from "@fastify/error";
 import { VehicleSchema } from "./vehicle.schema";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function errorHasCodeAndConstraint(obj: any): obj is {
   code: string;
   constraint:
@@ -40,7 +41,7 @@ export const handleVehicleUniqueConstraintError = (
   {
     placa,
     chassi,
-    renavam,
+    renavam
   }: Pick<VehicleSchema, "placa" | "chassi" | "renavam">
 ) => {
   if (errorHasCodeAndConstraint(error)) {

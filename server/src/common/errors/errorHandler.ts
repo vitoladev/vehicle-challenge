@@ -11,7 +11,7 @@ export const errorHandler = (
       statusCode: 422,
       error: "Unprocessable Entity",
       message: "Validation error",
-      errors: error.issues,
+      errors: error.issues
     });
     return;
   }
@@ -20,7 +20,7 @@ export const errorHandler = (
     reply.status(500).send({
       statusCode: 500,
       error: "Internal Server Error",
-      message: "An internal server error occurred",
+      message: "An internal server error occurred"
     });
     reply.log.error(error);
     return;

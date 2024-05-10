@@ -17,7 +17,10 @@ describe("Delete Vehicle - DELETE /vehicles/:id", () => {
   });
 
   it("should throw a 404 error if the vehicle does not exist", async () => {
-    const vehicleIdThatDoesNotExist = faker.number.int({ min: 10000, max: 20000 });
+    const vehicleIdThatDoesNotExist = faker.number.int({
+      min: 10000,
+      max: 20000
+    });
 
     const response = await supertest(app.server)
       .delete(`/vehicles/${vehicleIdThatDoesNotExist}`)

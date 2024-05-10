@@ -10,7 +10,7 @@ export const createVehicle = async (data: VehicleSchema) => {
     handleVehicleUniqueConstraintError(error, {
       placa: data.placa,
       chassi: data.chassi,
-      renavam: data.renavam,
+      renavam: data.renavam
     });
     throw error;
   }
