@@ -16,5 +16,15 @@ export const errorHandler = (
     return;
   }
 
+  if (error.statusCode === 500) {
+    reply.status(500).send({
+      statusCode: 500,
+      error: "Internal Server Error",
+      message: "An internal server error occurred",
+    });
+    reply.log.error(error);
+    return;
+  }
+
   reply.send(error);
 };
