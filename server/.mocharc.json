@@ -1,5 +1,5 @@
 {
-  "require": ["ts-node/register"],
+  "require": ["ts-node/register", "dotenv/config"],
   "spec": "src/**/__tests__/**/*.spec.ts",
   "node-option": [
     "loader=ts-node/esm"

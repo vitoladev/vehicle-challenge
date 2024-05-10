@@ -17,7 +17,7 @@
     "build": "tsc",
     "dev": "ts-node -r dotenv/config --transpile-only src/main.ts",
     "start": "node build/index.js",
-    "test": "mocha"
+    "test": "NODE_ENV=test mocha"
   },
   "keywords": [],
   "author": "",
